@@ -40,10 +40,12 @@ installing this skill:
 
 - **locally**: run `node <KIT>/scripts/serve-stickers.mjs` and use `http://127.0.0.1:8787`.
   The server binds to loopback only and serves nothing but the sticker files.
-- **over HTTPS**: a static host, a tunnel, or simply a public GitHub repo
-  (`https://raw.githubusercontent.com/<you>/<repo>/main/stickers`). Required for clients
-  that are themselves served over HTTPS — they refuse plain-HTTP images as mixed content.
-  ChatGPT is one of these: an `https://` image renders inline, `http://127.0.0.1` does not.
+- **over HTTPS**, when the client refuses the loopback address (clients served over HTTPS
+  treat plain-HTTP images as mixed content; ChatGPT renders an `https://` image inline but
+  not `http://127.0.0.1`). The files stay on disk either way — a tunnel such as
+  `cloudflared tunnel --url http://localhost:8787` just gives that local server an HTTPS
+  address. Publishing the library (object storage, a public repo's raw URL) also works, but
+  only for stickers you are entitled to distribute. See the README for the full ladder.
 
 Confirm once before relying on it: ask the assistant to print the line verbatim (not in a
 code block) and see whether an image or a link appears.

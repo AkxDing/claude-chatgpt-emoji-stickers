@@ -227,29 +227,32 @@ Everything else is untested; please
 [open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
 and what you saw.
 
-### Serving over HTTPS, with no server at all
+### If your client needs an HTTPS address
 
-A client served over HTTPS may refuse `http://127.0.0.1` (mixed content, and since
-Chrome 145 loopback access is behind a permission prompt), so **for those clients the
-library needs an HTTPS address**. You do not have to host anything:
+**The library always lives on your disk** — collecting, tagging and rotating never involve
+uploading anything. Delivery A sends straight from there and needs no address at all.
 
-**Put the library in a public GitHub repo and use the raw URL as the base address.**
+Only delivery B needs a URL, and a client served over HTTPS may refuse
+`http://127.0.0.1` (mixed content; since Chrome 145 loopback access is also behind a
+permission prompt). Work down this list and stop at the first one that works — it is
+ordered from most private to least:
 
-```
-https://raw.githubusercontent.com/<you>/<repo>/main/stickers
-https://cdn.jsdelivr.net/gh/<you>/<repo>@main/stickers      # same files, via a CDN
-```
+1. **Local server, as-is.** Try `http://127.0.0.1:8787` first; some clients allow it.
+   Nothing leaves your machine.
+2. **Local server behind a tunnel.** `cloudflared tunnel --url http://localhost:8787`
+   (or any equivalent) gives you an HTTPS address without an account. **The files still
+   sit on your disk**; only that address is reachable, and it changes each restart, so
+   update the skill's base URL when it does.
+3. **A public URL** — object storage, a static host, or a public GitHub repo whose raw
+   URL you point at:
+   `https://raw.githubusercontent.com/<you>/<repo>/main/stickers` (jsDelivr mirrors the
+   same files at `https://cdn.jsdelivr.net/gh/<you>/<repo>@main/stickers`). Zero
+   infrastructure, but ⚠️ **it publishes the material**, so this one is only for stickers
+   you are entitled to distribute. This repo's own samples are reachable that way if you
+   just want to try the flow before collecting your own.
 
-Both are plain HTTPS, cost nothing and need no infrastructure. The stickers in *this*
-repo are already reachable that way, so you can point a client at them to try the flow
-before collecting your own.
-
-⚠️ **This publishes the material.** It is the right answer for stickers you are allowed
-to distribute, and the wrong one for a library of reaction GIFs pulled off the internet —
-for those, use a private tunnel to the local server instead, or stay on delivery A.
-
-> ChatGPT's MCP support is not the route here: it connects to remote HTTPS servers only
-> (no local stdio) and needs a paid plan plus developer mode.
+> ChatGPT's MCP support is not a shortcut around this: it connects to remote HTTPS servers
+> only (no local stdio) and needs a paid plan plus developer mode.
 
 ## Contributing
 
