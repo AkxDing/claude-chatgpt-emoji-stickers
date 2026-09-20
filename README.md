@@ -4,7 +4,7 @@
 
 Give your AI assistant a sticker library it can actually use: it picks one by emotion and
 sends it into the chat, the way a person drops a reaction GIF. This repo is the **plumbing
-and the discipline**, not the artwork — a skill file, five maintenance scripts, and the
+and the discipline**, not the artwork — a skill file, six maintenance scripts, and the
 rules that came out of running this every day.
 
 ![A real Claude Code session in Chinese: the assistant sends an anime reaction sticker, writes a line of chat, then sends a second sticker as it starts working](docs/images/real-session.png)
@@ -12,11 +12,11 @@ rules that came out of running this every day.
 *A real session (in Chinese). The stickers there come from the author's own private
 library and are **not** included in this repo — see [bring your own stickers](#bring-your-own-stickers).*
 
-Delivery is verified in the **Claude Code desktop app**. The skill itself is written in the
-portable [Agent Skills](https://github.com/anthropics/skills) `SKILL.md` format that Codex,
-ChatGPT, Cursor and Gemini CLI also read, but those harnesses have no equivalent file-send
-tool — see [which harnesses can do this](#which-harnesses-can-do-this) before expecting it
-to work everywhere.
+Written in the portable [Agent Skills](https://github.com/anthropics/skills) `SKILL.md`
+format, which Claude Code, Codex, ChatGPT, Cursor and Gemini CLI all read. Delivery is
+verified in the Claude Code desktop app and works in any client that renders an image in
+a reply — see [will this work in my client?](#will-this-work-in-my-client) for the
+one-minute check.
 
 ## What is in here
 
@@ -220,9 +220,10 @@ and what you saw, and this section will grow into a real table.
 
 ## Contributing
 
-Adding a harness to that table is the most useful contribution. Please say which harness
-and version you tested, whether animation plays, and include a screenshot. Bug reports
-that include your OS, Node and Pillow versions get fixed faster.
+Telling us which clients can show a sticker is the most useful contribution: run the
+one-minute check above and open an issue with the client, its version, whether animation
+plays, and a screenshot. Bug reports that include your OS, Node and Pillow versions get
+fixed faster.
 
 ---
 
