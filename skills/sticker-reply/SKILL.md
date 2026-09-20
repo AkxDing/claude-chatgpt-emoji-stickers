@@ -21,15 +21,18 @@ often, which one) and **curating** (tagging, sizing, rotating, budgeting context
 Everything below is independent of *how* the image reaches the chat. Use whichever of
 these two the client supports — check once, then stick to it.
 
-**A. A file-send tool** (Claude Code desktop: `SendUserFile`). Pass an **absolute path with
-forward slashes**:
+**A. A tool that puts a local file into the chat** — the best route wherever it exists,
+because nothing is uploaded or hosted. Pass an **absolute path with forward slashes**:
 
 ```
-SendUserFile({ files: ["C:/path/to/stickers/happy/wave.gif"], status: "normal" })
+Claude Code desktop:  SendUserFile({ files: ["C:/path/to/stickers/happy/wave.gif"], status: "normal" })
+ChatGPT desktop:      view_image({ path: "C:/path/to/stickers/happy/wave.gif" })
 ```
 
-**B. A markdown image** (any client that renders images in replies — ChatGPT does).
-Write the link inline, on its own line:
+Use whichever of these the client actually offers, and prefer it over B.
+
+**B. A markdown image** — for clients with no such tool, but which render images in
+replies. Write the link inline, on its own line:
 
 ```
 ![](<STICKER_URL>/happy/wave.gif)

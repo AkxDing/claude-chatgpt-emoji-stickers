@@ -13,10 +13,10 @@ rules that came out of running this every day.
 library and are **not** included in this repo — see [bring your own stickers](#bring-your-own-stickers).*
 
 Written in the portable [Agent Skills](https://github.com/anthropics/skills) `SKILL.md`
-format, which Claude Code, Codex, ChatGPT, Cursor and Gemini CLI all read. Delivery is
-verified in the Claude Code desktop app and works in any client that renders an image in
-a reply — see [will this work in my client?](#will-this-work-in-my-client) for the
-one-minute check.
+format, which Claude Code, Codex, ChatGPT, Cursor and Gemini CLI all read. **Delivery is
+verified in both the Claude Code and the ChatGPT desktop apps** — each has a built-in tool
+that puts a local image into the chat, so there is nothing to host and nothing to upload.
+Other clients: see [will this work in my client?](#will-this-work-in-my-client).
 
 ## What is in here
 
@@ -189,9 +189,15 @@ other tool arguments, no file contents. Its output, `stickers/usage.json`, is a 
 The library, tagging and rotation are just files and scripts — they work anywhere. The
 only thing a client has to provide is **a way to show an image**, and there are two:
 
-**A. A file-send tool.** Claude Code's desktop app has `SendUserFile`. Verified: GIF
-animates and loops, PNG and JPG render, SVG does not. Costs ~50 tokens per sticker
-because only the path is sent.
+**A. A tool that puts a local file into the chat.** Two clients have one, and it is the
+best route in both: the assistant passes a path, nothing is uploaded, nothing is hosted,
+and it costs ~50 tokens because only the path travels.
+
+- **Claude Code desktop** — `SendUserFile({ files: ["…/happy/wave.gif"] })`. Verified:
+  GIF animates and loops, PNG and JPG render, SVG does not.
+- **ChatGPT desktop** — `view_image({ path: "…/happy/wave.gif" })`, its built-in image
+  viewer. Verified 2026-09-20: it reads the local file and shows it in the conversation.
+  No dependency, no server, no Python or ImageMagick involved.
 
 **B. Rendering a markdown image.** Most chat clients do this. Run the bundled loopback
 server and the assistant just writes `![](http://127.0.0.1:8787/happy/wave.gif)`:
@@ -220,7 +226,7 @@ Known so far:
 | Client | Result |
 |---|---|
 | **Claude Code desktop app** | **A works** (GIF animates and loops). B does not — it blocks image URLs in replies |
-| **ChatGPT desktop app** | **B works over HTTPS** — verified 2026-09-20: an `https://` image printed by the assistant renders inline. A is unavailable (no file-send tool) |
+| **ChatGPT desktop app** | **A works** via its built-in `view_image` tool on a local path — verified 2026-09-20; use this. B also works, but only over HTTPS: an `https://` image printed by the assistant renders inline, `http://127.0.0.1` does not |
 | A plain terminal | Expect a file card or a bare link |
 
 Everything else is untested; please
@@ -229,10 +235,11 @@ and what you saw.
 
 ### If your client needs an HTTPS address
 
-**The library always lives on your disk** — collecting, tagging and rotating never involve
-uploading anything. Delivery A sends straight from there and needs no address at all.
+**Skip this whole section if your client has a file tool** — Claude Code and ChatGPT both
+do, and delivery A needs no address, no server and no hosting at all.
 
-Only delivery B needs a URL, and a client served over HTTPS may refuse
+**The library always lives on your disk** — collecting, tagging and rotating never involve
+uploading anything. Only delivery B needs a URL, and a client served over HTTPS may refuse
 `http://127.0.0.1` (mixed content; since Chrome 145 loopback access is also behind a
 permission prompt). Work down this list and stop at the first one that works — it is
 ordered from most private to least:
