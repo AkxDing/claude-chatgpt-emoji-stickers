@@ -17,16 +17,30 @@ often, which one) and **curating** (tagging, sizing, rotating, budgeting context
 
 ## Sending
 
-Deliver with the `SendUserFile` tool and an **absolute path with forward slashes**:
+Everything below is independent of *how* the image reaches the chat. Use whichever of
+these two the client supports — check once, then stick to it.
+
+**A. A file-send tool** (Claude Code desktop: `SendUserFile`). Pass an **absolute path with
+forward slashes**:
 
 ```
 SendUserFile({ files: ["C:/path/to/stickers/happy/wave.gif"], status: "normal" })
 ```
 
-Verified formats: **GIF (animates and loops), PNG, JPG**. SVG does not render. File size
-does not matter for cost — only the path is sent, the image never enters the model's
-context, so one delivery costs roughly 50 tokens (measured in the Claude Code desktop app;
-see `docs/findings.md` for the numbers and when they were taken).
+**B. A markdown image** (any client that renders images in replies). Start the local
+server once — `node <KIT>/scripts/serve-stickers.mjs` — and write the link inline:
+
+```
+![](http://127.0.0.1:8787/happy/wave.gif)
+```
+
+The server binds to loopback only and serves nothing but the sticker files. Confirm with
+the client once before relying on it: some render the image, some print the link.
+
+Verified formats in the Claude Code desktop app: **GIF (animates and loops), PNG, JPG**;
+SVG does not render. With a file-send tool, file size does not matter for cost — only the
+path is sent, the image never enters the model's context, so one delivery costs roughly
+50 tokens (see `docs/findings.md` for the numbers and when they were taken).
 
 ### Pick by tag, never by folder
 
@@ -114,7 +128,9 @@ next session offers different candidates.
 ## Debugging
 
 - **Nothing appears** — check the format (SVG never renders) and that the path is
-  absolute. In a plain terminal, expect a file card rather than a rendered image.
+  absolute. In a plain terminal, expect a file card rather than a rendered image. With
+  delivery B, check that `serve-stickers.mjs` is still running and that the URL opens in a
+  browser; if the link shows as text, the client does not render markdown images.
 - **Delivery fails with "does not exist"** — almost always a typo in a hand-typed path.
   Copy entries from the candidate list verbatim instead of retyping them.
 - **The same sticker keeps coming up** — usage counts are stale; run `count-usage.mjs`.

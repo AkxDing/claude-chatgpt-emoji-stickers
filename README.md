@@ -26,6 +26,7 @@ scripts/build-index.mjs            candidate list; --check validates; --hook bou
 scripts/count-usage.mjs            real delivery counts from local session transcripts
 scripts/contact-sheet.py           8 frames per animated sticker, so you tag the whole motion
 scripts/normalize-width.py         uniform width, reversible, animation-safe
+scripts/serve-stickers.mjs         loopback HTTP server, for clients without a file-send tool
 scripts/make-sample-stickers.py    draws the four placeholder stickers
 stickers/tags.json                 emotion vocabulary + per-sticker tags
 docs/findings.md                   measured rendering and cost results behind the rules
@@ -183,21 +184,39 @@ image paths passed to `SendUserFile` and how often each occurred. No conversatio
 other tool arguments, no file contents. Its output, `stickers/usage.json`, is a plain
 `{path: count}` map and is gitignored.
 
-## Which harnesses can do this
+## Will this work in my client?
 
-The library, tagging and rotation scripts are harness-agnostic. **Delivery is not** — the
-assistant needs some way to put a local image into the chat.
+The library, tagging and rotation are just files and scripts — they work anywhere. The
+only thing a client has to provide is **a way to show an image**, and there are two:
 
-| Harness | Delivery | Status |
-|---|---|---|
-| Claude Code desktop app | `SendUserFile` tool | **Verified.** GIF animates and loops; PNG and JPG render; SVG does not |
-| Claude Code in a plain terminal | `SendUserFile` | Expect a file card, not a rendered image |
-| ChatGPT desktop, Codex, Cursor, others | reads `SKILL.md`, but has no equivalent file-send tool; inline media generally arrives as an MCP tool result | **Untested here** |
+**A. A file-send tool.** Claude Code's desktop app has `SendUserFile`. Verified: GIF
+animates and loops, PNG and JPG render, SVG does not. Costs ~50 tokens per sticker
+because only the path is sent.
 
-If you need delivery on a harness without a file-send tool, an MCP server returning the
-image as a tool result is the route. That is not implemented here yet, and
-[PRs are welcome](https://github.com/AkxDing/claude-emoji-stickers/issues) — the table
-above is the part of this README most worth filling in.
+**B. Rendering a markdown image.** Most chat clients do this. Run the bundled loopback
+server and the assistant just writes `![](http://127.0.0.1:8787/happy/wave.gif)`:
+
+```bash
+node scripts/serve-stickers.mjs
+```
+
+No account, no subscription, no public hosting, no dependencies — it binds to 127.0.0.1
+and serves nothing but the sticker files.
+
+**The one-minute check** for any client: start the server, paste
+`![](http://127.0.0.1:8787/celebrate/party-popper.png)` into a message yourself. If you
+see the image, that client can do this. If you see a link, it cannot.
+
+Known so far: **Claude Code desktop** — A works, B does not (it blocks external image
+URLs in replies). **A plain terminal** — expect a file card or a bare link. Everything
+else is untested; please
+[open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
+and what you saw, and this section will grow into a real table.
+
+> ChatGPT specifically: it reads `SKILL.md`, but has no file-send tool, and its MCP
+> support connects to **remote HTTPS** servers only — no local stdio — plus a paid plan
+> and developer mode. So delivery B via a client that renders images is the realistic
+> route there, not MCP.
 
 ## Contributing
 

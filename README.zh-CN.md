@@ -24,6 +24,7 @@ scripts/build-index.mjs            候选清单；--check 校验；--hook 控制
 scripts/count-usage.mjs            从本地会话记录统计真实投递次数
 scripts/contact-sheet.py           每张动图抽 8 帧，让你按完整动作打标签
 scripts/normalize-width.py         统一宽度，可还原，不损坏动画
+scripts/serve-stickers.mjs         本地环回 HTTP 服务，供没有文件投递工具的客户端使用
 scripts/make-sample-stickers.py    绘制随仓库附带的四张占位素材
 stickers/tags.json                 情绪词表 + 每张素材的标签
 docs/findings.md                   规则背后的渲染与成本实测数据
@@ -162,20 +163,36 @@ MIT 许可（详见 `NOTICE`），只为证明流程能跑通。另外 `make-sam
 与各自出现次数**：不读取对话正文、不读取其他工具的参数、不读取任何文件内容。产物
 `stickers/usage.json` 只是一份 `{路径: 次数}` 映射，且已被 gitignore。
 
-## 哪些客户端能用
+## 我的客户端能用吗
 
-素材库、打标签与轮换这几个脚本与客户端无关，**但投递能力有关**——助手需要某种方式把本地
-图片放进对话里。
+素材库、打标签与轮换都只是文件和脚本，在哪都能跑。客户端唯一需要提供的是**把图显示
+出来的能力**，而这只有两种形态：
 
-| 客户端 | 投递方式 | 状态 |
-|---|---|---|
-| Claude Code 桌面端 | `SendUserFile` 工具 | **已实测**。GIF 会循环播放，PNG 与 JPG 正常显示，SVG 不显示 |
-| Claude Code 纯终端 | `SendUserFile` | 大概率只看到一张文件卡片，而非渲染出的图片 |
-| ChatGPT 桌面端、Codex、Cursor 等 | 能读 `SKILL.md`，但没有等价的文件投递工具；内联媒体一般以 MCP 工具结果的形式返回 | **尚未实测** |
+**A. 有文件投递工具。** Claude Code 桌面端的 `SendUserFile` 属于这类。已实测：GIF 会循环
+播放，PNG 与 JPG 正常显示，SVG 不显示。每张约 50 token，因为只传路径。
 
-如果你需要在没有文件投递工具的客户端上使用，正确的路线是写一个把图片作为工具结果返回的
-MCP 服务。本仓库暂未实现，[欢迎提 PR](https://github.com/AkxDing/claude-emoji-stickers/issues)
-——上面那张表是本文档最值得补全的部分。
+**B. 能渲染 markdown 图片。** 多数聊天客户端都可以。跑起仓库自带的本地服务，助手只要
+写一行 `![](http://127.0.0.1:8787/happy/wave.gif)`：
+
+```bash
+node scripts/serve-stickers.mjs
+```
+
+不需要账号、不需要订阅、不需要公网部署、零依赖——它只监听 127.0.0.1，且只对外提供素材
+文件本身。
+
+**任何客户端都可以一分钟自测**：把服务跑起来，自己在对话框里粘贴
+`![](http://127.0.0.1:8787/celebrate/party-popper.png)` 发一条。**看到图就说明这个客户端
+能用；只看到一条链接就说明不能。**
+
+目前已知：**Claude Code 桌面端** —— A 可用，B 不可用（它会拦截回复正文里的外部图片地址）；
+**纯终端** —— 只会看到文件卡片或一条链接。其余客户端均未实测，欢迎
+[提 issue](https://github.com/AkxDing/claude-emoji-stickers/issues) 告诉我们你用的客户端
+与实际效果，这一节会逐步长成一张真正的兼容表。
+
+> 关于 ChatGPT：它能读 `SKILL.md`，但没有文件投递工具，而且它的 MCP 只能连**远程 HTTPS**
+> 服务（不支持本地 stdio），还需要付费套餐并手动开启开发者模式。因此在那边现实的路线是
+> 方式 B——用一个会渲染图片的客户端，而不是 MCP。
 
 ## 参与贡献
 
