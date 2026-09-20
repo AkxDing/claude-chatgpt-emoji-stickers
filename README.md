@@ -196,8 +196,9 @@ and it costs ~50 tokens because only the path travels.
 - **Claude Code desktop** — `SendUserFile({ files: ["…/happy/wave.gif"] })`. Verified:
   GIF animates and loops, PNG and JPG render, SVG does not.
 - **ChatGPT desktop** — `view_image({ path: "…/happy/wave.gif" })`, its built-in image
-  viewer. Verified 2026-09-20: it reads the local file and shows it in the conversation.
-  No dependency, no server, no Python or ImageMagick involved.
+  viewer. Verified 2026-09-20: it reads the local file and shows it in the conversation,
+  **GIFs loop just like they do in Claude Code**, and **no file-access permission has to
+  be granted** — it just works. No dependency, no server, no Python or ImageMagick.
 
 **B. Rendering a markdown image.** Most chat clients do this. Run the bundled loopback
 server and the assistant just writes `![](http://127.0.0.1:8787/happy/wave.gif)`:
@@ -226,7 +227,7 @@ Known so far:
 | Client | Result |
 |---|---|
 | **Claude Code desktop app** | **A works** (GIF animates and loops). B does not — it blocks image URLs in replies |
-| **ChatGPT desktop app** | **A works** via its built-in `view_image` tool on a local path — verified 2026-09-20; use this. B also works, but only over HTTPS: an `https://` image printed by the assistant renders inline, `http://127.0.0.1` does not |
+| **ChatGPT desktop app** | **A works** via its built-in `view_image` tool on a local path — verified 2026-09-20: GIFs loop, no permission needed. Use this. B also works, but only over HTTPS: an `https://` image printed by the assistant renders inline, `http://127.0.0.1` does not |
 | A plain terminal | Expect a file card or a bare link |
 
 Everything else is untested; please

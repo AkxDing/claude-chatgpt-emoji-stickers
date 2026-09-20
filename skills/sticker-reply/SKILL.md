@@ -29,7 +29,9 @@ Claude Code desktop:  SendUserFile({ files: ["C:/path/to/stickers/happy/wave.gif
 ChatGPT desktop:      view_image({ path: "C:/path/to/stickers/happy/wave.gif" })
 ```
 
-Use whichever of these the client actually offers, and prefer it over B.
+Use whichever of these the client actually offers, and prefer it over B. Both were
+verified on 2026-09-20: animated GIFs loop in each, and neither needs a file-access
+permission to be granted first.
 
 **B. A markdown image** — for clients with no such tool, but which render images in
 replies. Write the link inline, on its own line:
