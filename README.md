@@ -203,9 +203,17 @@ node scripts/serve-stickers.mjs
 No account, no subscription, no public hosting, no dependencies — it binds to 127.0.0.1
 and serves nothing but the sticker files.
 
-**The one-minute check** for any client: start the server, paste
-`![](http://127.0.0.1:8787/celebrate/party-popper.png)` into a message yourself. If you
-see the image, that client can do this. If you see a link, it cannot.
+**The one-minute check** for any client: start the server, then ask the assistant to
+output this line verbatim, outside a code block —
+`![](http://127.0.0.1:8787/celebrate/party-popper.png)`. If you see the image, that client
+can do this. If you see a link, it cannot. Ask the *assistant* to print it rather than
+pasting it yourself: many clients render markdown in replies but not in your own messages.
+
+⚠️ **Web-based clients and `127.0.0.1`.** A client served over HTTPS will usually refuse
+to load a plain-HTTP image (mixed content), so the loopback URL fails there even though
+the client renders images perfectly well. If the check above fails but an `https://…`
+image does render, serve the library over HTTPS instead — any tunnel or static host will
+do — and point the skill at that base URL.
 
 Known so far: **Claude Code desktop** — A works, B does not (it blocks external image
 URLs in replies). **A plain terminal** — expect a file card or a bare link. Everything
