@@ -10,10 +10,7 @@ rules that came out of running this every day.
 ![A real Claude Code session in Chinese: the assistant sends an anime reaction sticker, writes a line of chat, then sends a second sticker as it starts working](docs/images/real-session.png)
 
 *A real session (in Chinese). The stickers there come from the author's own private
-library and are **not** included in this repo — see [bring your own stickers](#bring-your-own-stickers).
-Below is the same idea with the placeholder stickers that do ship here:*
-
-![The assistant answers "tests are green, ship it" with a party-popper sticker, then a peeking-eye sticker when asked whether it touched production](docs/images/in-chat-example.png)
+library and are **not** included in this repo — see [bring your own stickers](#bring-your-own-stickers).*
 
 Delivery is verified in the **Claude Code desktop app**. The skill itself is written in the
 portable [Agent Skills](https://github.com/anthropics/skills) `SKILL.md` format that Codex,

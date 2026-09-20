@@ -9,9 +9,7 @@
 ![真实会话截图：助手先发一张动漫反应图，说完一句话后开始干活，又发出第二张](docs/images/real-session.png)
 
 *上图是真实会话。其中的表情包来自作者的私人素材库，**并不随本仓库分发**，
-详见[换成你自己的素材](#换成你自己的素材)。下图是用仓库自带的占位素材演示同一件事：*
-
-![助手先用礼花表情回应「测试通过，上线吧」，被追问是否动了生产环境时又发出一张捂眼偷看的表情](docs/images/in-chat-example.png)
+详见[换成你自己的素材](#换成你自己的素材)。*
 
 投递能力在 **Claude Code 桌面端**实测通过。技能本体采用跨平台的
 [Agent Skills](https://github.com/anthropics/skills) `SKILL.md` 格式，Codex、ChatGPT、
