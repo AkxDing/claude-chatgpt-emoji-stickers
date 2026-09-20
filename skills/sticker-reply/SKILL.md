@@ -9,11 +9,12 @@ Send an image from a local library at moments where a person would react, instea
 describing the reaction in words. This skill covers both halves: **sending** (when, how
 often, which one) and **curating** (tagging, sizing, rotating, budgeting context).
 
-> **Where the scripts live.** Replace `<KIT>` below with the path to the
+> **Two placeholders to fill in when installing.** Replace `<KIT>` below with the path to the
 > claude-emoji-stickers checkout (for example `~/src/claude-emoji-stickers`). The skill is
 > loaded from the skills directory, but the scripts are not: running them relative to the
 > current project will fail. If the library itself sits somewhere other than
-> `<KIT>/stickers`, also set `STICKER_DIR`.
+> `<KIT>/stickers`, also set `STICKER_DIR`. If the client needs delivery B, replace
+> `<STICKER_URL>` with the base address the library is served from.
 
 ## Sending
 
@@ -27,15 +28,24 @@ forward slashes**:
 SendUserFile({ files: ["C:/path/to/stickers/happy/wave.gif"], status: "normal" })
 ```
 
-**B. A markdown image** (any client that renders images in replies). Start the local
-server once — `node <KIT>/scripts/serve-stickers.mjs` — and write the link inline:
+**B. A markdown image** (any client that renders images in replies — ChatGPT does).
+Write the link inline, on its own line:
 
 ```
-![](http://127.0.0.1:8787/happy/wave.gif)
+![](<STICKER_URL>/happy/wave.gif)
 ```
 
-The server binds to loopback only and serves nothing but the sticker files. Confirm with
-the client once before relying on it: some render the image, some print the link.
+`<STICKER_URL>` is the base address the library is served from — fill it in when
+installing this skill:
+
+- **locally**: run `node <KIT>/scripts/serve-stickers.mjs` and use `http://127.0.0.1:8787`.
+  The server binds to loopback only and serves nothing but the sticker files.
+- **over HTTPS**: any static host or tunnel in front of the library. Required for clients
+  that are themselves served over HTTPS — they refuse plain-HTTP images as mixed content.
+  ChatGPT is one of these: an `https://` image renders inline, `http://127.0.0.1` does not.
+
+Confirm once before relying on it: ask the assistant to print the line verbatim (not in a
+code block) and see whether an image or a link appears.
 
 Verified formats in the Claude Code desktop app: **GIF (animates and loops), PNG, JPG**;
 SVG does not render. With a file-send tool, file size does not matter for cost — only the

@@ -215,16 +215,23 @@ the client renders images perfectly well. If the check above fails but an `https
 image does render, serve the library over HTTPS instead — any tunnel or static host will
 do — and point the skill at that base URL.
 
-Known so far: **Claude Code desktop** — A works, B does not (it blocks external image
-URLs in replies). **A plain terminal** — expect a file card or a bare link. Everything
-else is untested; please
-[open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
-and what you saw, and this section will grow into a real table.
+Known so far:
 
-> ChatGPT specifically: it reads `SKILL.md`, but has no file-send tool, and its MCP
-> support connects to **remote HTTPS** servers only — no local stdio — plus a paid plan
-> and developer mode. So delivery B via a client that renders images is the realistic
-> route there, not MCP.
+| Client | Result |
+|---|---|
+| **Claude Code desktop app** | **A works** (GIF animates and loops). B does not — it blocks image URLs in replies |
+| **ChatGPT desktop app** | **B works over HTTPS** — verified 2026-09-20: an `https://` image printed by the assistant renders inline. A is unavailable (no file-send tool) |
+| A plain terminal | Expect a file card or a bare link |
+
+Everything else is untested; please
+[open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
+and what you saw.
+
+> **Serving over HTTPS.** ChatGPT renders `https://` images, so put the library behind any
+> static host or tunnel and point the skill at that base URL. Note the library then lives
+> wherever that URL points — keep it private or access-controlled if the stickers are not
+> yours to publish. Its MCP support is not the route here: that connects to remote HTTPS
+> servers only (no local stdio) and needs a paid plan plus developer mode.
 
 ## Contributing
 
