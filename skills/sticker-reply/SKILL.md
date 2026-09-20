@@ -10,7 +10,7 @@ describing the reaction in words. This skill covers both halves: **sending** (wh
 often, which one) and **curating** (tagging, sizing, rotating, budgeting context).
 
 > **Two placeholders to fill in when installing.** Replace `<KIT>` below with the path to the
-> claude-emoji-stickers checkout (for example `~/src/claude-emoji-stickers`). The skill is
+> claude-chatgpt-emoji-stickers checkout (for example `~/src/claude-chatgpt-emoji-stickers`). The skill is
 > loaded from the skills directory, but the scripts are not: running them relative to the
 > current project will fail. If the library itself sits somewhere other than
 > `<KIT>/stickers`, also set `STICKER_DIR`. If the client needs delivery B, replace

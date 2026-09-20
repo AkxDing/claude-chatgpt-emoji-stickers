@@ -62,8 +62,8 @@ docs/findings.md                   规则背后的渲染与成本实测数据
 ## 安装
 
 ```bash
-git clone https://github.com/AkxDing/claude-emoji-stickers.git
-cd claude-emoji-stickers
+git clone https://github.com/AkxDing/claude-chatgpt-emoji-stickers.git
+cd claude-chatgpt-emoji-stickers
 ```
 
 安装 Pillow，建议放在虚拟环境里（较新的 macOS、Debian、Ubuntu 会按
@@ -207,7 +207,7 @@ http 图片（混合内容），因此即使该客户端本身能正常显示图
 | 纯终端 | 只会看到文件卡片或一条链接 |
 
 其余客户端均未实测，欢迎
-[提 issue](https://github.com/AkxDing/claude-emoji-stickers/issues) 告诉我们你用的客户端
+[提 issue](https://github.com/AkxDing/claude-chatgpt-emoji-stickers/issues) 告诉我们你用的客户端
 与实际效果。
 
 ### 如果你的客户端需要一个 https 地址

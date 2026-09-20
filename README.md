@@ -73,8 +73,8 @@ the top and one at the end of the report.
 ## Install
 
 ```bash
-git clone https://github.com/AkxDing/claude-emoji-stickers.git
-cd claude-emoji-stickers
+git clone https://github.com/AkxDing/claude-chatgpt-emoji-stickers.git
+cd claude-chatgpt-emoji-stickers
 ```
 
 Pillow, in a virtual environment (recent macOS, Debian and Ubuntu refuse `pip install`
@@ -231,7 +231,7 @@ Known so far:
 | A plain terminal | Expect a file card or a bare link |
 
 Everything else is untested; please
-[open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
+[open an issue](https://github.com/AkxDing/claude-chatgpt-emoji-stickers/issues) with your client
 and what you saw.
 
 ### If your client needs an HTTPS address
