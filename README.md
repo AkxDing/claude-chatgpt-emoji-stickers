@@ -1,6 +1,6 @@
 <div align="right"><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></div>
 
-# Sticker replies for Claude Code
+# Sticker replies for Claude Code and ChatGPT
 
 Give your AI assistant a sticker library it can actually use: it picks one by emotion and
 sends it into the chat, the way a person drops a reaction GIF. This repo is the **plumbing
@@ -209,7 +209,7 @@ node scripts/serve-stickers.mjs
 No account, no subscription, no public hosting, no dependencies — it binds to 127.0.0.1
 and serves nothing but the sticker files.
 
-**The one-minute check** for any client: start the server, then ask the assistant to
+**The one-minute check**, for a client with no file tool: start the server, then ask the assistant to
 output this line verbatim, outside a code block —
 `![](http://127.0.0.1:8787/celebrate/party-popper.png)`. If you see the image, that client
 can do this. If you see a link, it cannot. Ask the *assistant* to print it rather than
