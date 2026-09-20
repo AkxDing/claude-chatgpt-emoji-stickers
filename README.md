@@ -227,11 +227,29 @@ Everything else is untested; please
 [open an issue](https://github.com/AkxDing/claude-emoji-stickers/issues) with your client
 and what you saw.
 
-> **Serving over HTTPS.** ChatGPT renders `https://` images, so put the library behind any
-> static host or tunnel and point the skill at that base URL. Note the library then lives
-> wherever that URL points — keep it private or access-controlled if the stickers are not
-> yours to publish. Its MCP support is not the route here: that connects to remote HTTPS
-> servers only (no local stdio) and needs a paid plan plus developer mode.
+### Serving over HTTPS, with no server at all
+
+A client served over HTTPS may refuse `http://127.0.0.1` (mixed content, and since
+Chrome 145 loopback access is behind a permission prompt), so **for those clients the
+library needs an HTTPS address**. You do not have to host anything:
+
+**Put the library in a public GitHub repo and use the raw URL as the base address.**
+
+```
+https://raw.githubusercontent.com/<you>/<repo>/main/stickers
+https://cdn.jsdelivr.net/gh/<you>/<repo>@main/stickers      # same files, via a CDN
+```
+
+Both are plain HTTPS, cost nothing and need no infrastructure. The stickers in *this*
+repo are already reachable that way, so you can point a client at them to try the flow
+before collecting your own.
+
+⚠️ **This publishes the material.** It is the right answer for stickers you are allowed
+to distribute, and the wrong one for a library of reaction GIFs pulled off the internet —
+for those, use a private tunnel to the local server instead, or stay on delivery A.
+
+> ChatGPT's MCP support is not the route here: it connects to remote HTTPS servers only
+> (no local stdio) and needs a paid plan plus developer mode.
 
 ## Contributing
 

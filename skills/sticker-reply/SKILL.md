@@ -40,7 +40,8 @@ installing this skill:
 
 - **locally**: run `node <KIT>/scripts/serve-stickers.mjs` and use `http://127.0.0.1:8787`.
   The server binds to loopback only and serves nothing but the sticker files.
-- **over HTTPS**: any static host or tunnel in front of the library. Required for clients
+- **over HTTPS**: a static host, a tunnel, or simply a public GitHub repo
+  (`https://raw.githubusercontent.com/<you>/<repo>/main/stickers`). Required for clients
   that are themselves served over HTTPS — they refuse plain-HTTP images as mixed content.
   ChatGPT is one of these: an `https://` image renders inline, `http://127.0.0.1` does not.
 
