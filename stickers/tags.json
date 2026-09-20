@@ -1,0 +1,15 @@
+{
+  "_readme": "Emotion tags per sticker. Key is \"<folder>/<file>\" relative to the sticker library; value is the list of emotions it fits. Folders are storage only — retrieval always goes through tags, and one sticker may carry several. Tags must come from _vocabulary below; extend that list when you genuinely need a new emotion.",
+  "_vocabulary_note": "Keep tags specific. If one sticker is the obvious best answer for a whole tag, that tag is too coarse and should be split, otherwise that sticker gets sent over and over while the rest go unused.",
+  "_vocabulary": [
+    "happy", "proud", "celebrate", "laughing", "affectionate", "shy", "cute", "close",
+    "smug", "defiant", "agree", "focused", "determined", "thinking",
+    "confused", "surprised", "moved", "sad", "apologetic", "nervous", "awkward",
+    "overwhelmed", "unhinged", "hopeless", "scared", "angry",
+    "bored", "tired", "silly", "eating"
+  ],
+  "celebrate/partying-face.gif": ["celebrate", "happy", "proud"],
+  "thinking/thinking-face.gif": ["thinking", "focused", "confused"],
+  "nervous/nervous-smile.gif": ["nervous", "awkward", "apologetic"],
+  "happy/smiling-face.gif": ["happy", "cute", "affectionate"]
+}
