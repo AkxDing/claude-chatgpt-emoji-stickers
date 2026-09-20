@@ -1,0 +1,13 @@
+The twelve sample stickers under stickers/ are from Fluent Emoji by Microsoft
+(https://github.com/microsoft/fluentui-emoji), used under the MIT licence:
+
+    Copyright (c) Microsoft Corporation.
+    Licensed under the MIT License.
+
+They are the "3D" style assets, resized from 256 px to 250 px wide; no other
+modification was made. Verified against that repository's LICENSE file on 2026-09-20.
+
+They are placeholders, there to prove the pipeline runs end to end. Anything you add
+yourself is your own responsibility: reaction GIFs found on sticker sites are usually
+derived from copyrighted works, which is fine for private use but is not something to
+redistribute in a public repository.

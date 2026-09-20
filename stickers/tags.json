@@ -8,8 +8,16 @@
     "overwhelmed", "unhinged", "hopeless", "scared", "angry",
     "bored", "tired", "silly", "eating"
   ],
-  "celebrate/partying-face.gif": ["celebrate", "happy", "proud"],
-  "thinking/thinking-face.gif": ["thinking", "focused", "confused"],
-  "nervous/nervous-smile.gif": ["nervous", "awkward", "apologetic"],
-  "happy/smiling-face.gif": ["happy", "cute", "affectionate"]
+  "celebrate/party-popper.png": ["celebrate", "happy"],
+  "celebrate/partying-face.png": ["celebrate", "happy", "silly"],
+  "happy/beaming-face.png": ["happy", "laughing", "proud"],
+  "happy/face-with-hearts.png": ["affectionate", "happy", "shy"],
+  "thinking/thinking-face.png": ["thinking", "focused"],
+  "thinking/face-with-monocle.png": ["thinking", "confused", "focused"],
+  "nervous/grimacing-face.png": ["nervous", "awkward", "apologetic"],
+  "nervous/peeking-eye.png": ["nervous", "surprised", "scared"],
+  "proud/rocket.png": ["proud", "determined", "celebrate"],
+  "proud/face-with-sunglasses.png": ["proud", "smug"],
+  "sad/loudly-crying-face.png": ["sad", "hopeless", "overwhelmed"],
+  "silly/upside-down-face.png": ["silly", "defiant", "awkward"]
 }

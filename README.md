@@ -1,3 +1,5 @@
+<div align="right"><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></div>
+
 # Sticker replies for Claude Code
 
 Give your AI assistant a sticker library it can actually use: it picks one by emotion and
@@ -5,10 +7,7 @@ sends it into the chat, the way a person drops a reaction GIF. This repo is the 
 and the discipline**, not the artwork — a skill file, five maintenance scripts, and the
 rules that came out of running this every day.
 
-```
-You:  ship it
-AI:   [sends celebrate/partying-face.gif]  deployed, version 4c1f — here is the diff…
-```
+![A chat where the assistant answers "tests are green, ship it" with a party-popper sticker, then a peeking-eye sticker when asked whether it touched production](docs/images/in-chat-example.png)
 
 Delivery is verified in the **Claude Code desktop app**. The skill itself is written in the
 portable [Agent Skills](https://github.com/anthropics/skills) `SKILL.md` format that Codex,
@@ -141,11 +140,13 @@ the start of a conversation.
 
 ## Bring your own stickers
 
-The four samples in `stickers/` are drawn by `make-sample-stickers.py` — plain smileys,
-there to prove the pipeline runs end to end. **This repository deliberately ships no
-third-party artwork at all**, so everything in it is covered by its own MIT licence.
+The twelve samples in `stickers/` are [Fluent Emoji](https://github.com/microsoft/fluentui-emoji)
+by Microsoft, MIT licensed (see `NOTICE`) — there to prove the pipeline runs end to end.
+`make-sample-stickers.py` additionally draws a few plain animated GIFs if you want
+something animated to try the contact-sheet workflow on.
 
-Replace them. Reaction GIFs are easy to find on [giphy.com](https://giphy.com) and
+Replace them: standard emoji make a poor sticker library, because the whole point is a
+reaction with a face and a motion behind it. Reaction GIFs are easy to find on [giphy.com](https://giphy.com) and
 [tenor.com](https://tenor.com); pick a look you like and keep it consistent, because a
 library built around one coherent character reads far better than a pile of unrelated
 memes. **Whatever you collect is yours to sort out licence-wise** — reaction GIFs are

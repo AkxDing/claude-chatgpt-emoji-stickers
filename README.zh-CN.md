@@ -1,13 +1,12 @@
+<div align="right"><a href="README.md">English</a> · <strong>简体中文</strong></div>
+
 # 给 Claude Code 配一套会发的表情包
 
 让 AI 助手拥有一个可用的表情包库：按情绪挑一张，直接发进对话里，就像真人甩一张反应图。
 本仓库提供的是**机制与规范，不是素材**——一份技能文件、五个维护脚本，以及每天真实使用后
 沉淀下来的规则。
 
-```
-你：   上线吧
-助手： [发送 celebrate/partying-face.gif] 已部署，版本 4c1f，下面是改动明细……
-```
+![对话中助手先用礼花表情回应「测试通过，上线吧」，被追问是否动了生产环境时又发出一张捂眼偷看的表情](docs/images/in-chat-example.png)
 
 投递能力在 **Claude Code 桌面端**实测通过。技能本体采用跨平台的
 [Agent Skills](https://github.com/anthropics/skills) `SKILL.md` 格式，Codex、ChatGPT、
@@ -126,11 +125,11 @@ node scripts/count-usage.mjs            # 仅 Claude Code；启用冷门优先�
 
 ## 换成你自己的素材
 
-`stickers/` 里的四张示例由 `make-sample-stickers.py` 现画，就是几张朴素的笑脸，只为证明
-流程能跑通。**本仓库刻意不附带任何第三方素材**，因此其中每一个文件都由仓库自身的 MIT
-许可证覆盖。
+`stickers/` 里的十二张示例来自微软的 [Fluent Emoji](https://github.com/microsoft/fluentui-emoji)，
+MIT 许可（详见 `NOTICE`），只为证明流程能跑通。另外 `make-sample-stickers.py` 会现画几张
+朴素的动图，供你试用抽帧联系表那套流程。
 
-请替换掉它们。反应类动图在 [giphy.com](https://giphy.com)、[tenor.com](https://tenor.com)
+请替换掉它们：标准 emoji 当表情包并不好用，因为表情包的意义正在于「有张脸、有个动作」。反应类动图在 [giphy.com](https://giphy.com)、[tenor.com](https://tenor.com)
 上很好找；建议挑定一种画风并保持统一，**同一个角色的库比一堆互不相干的梗图耐看得多**。
 **你收集的素材版权由你自己负责**——反应动图通常改编自受版权保护的作品，自用没问题，但不
 适合放进公开仓库再分发。
